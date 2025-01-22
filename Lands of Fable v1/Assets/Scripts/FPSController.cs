@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class FPSController : MonoBehaviour
@@ -32,6 +33,14 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
+        #region Handles UI
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
+        #endregion
+
+
 
         #region Handles Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -45,6 +54,8 @@ public class FPSController : MonoBehaviour
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
         #endregion
+
+
 
         #region Handles Jumping
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
@@ -62,6 +73,9 @@ public class FPSController : MonoBehaviour
         }
 
         #endregion
+
+
+
 
         #region Handles Rotation
         characterController.Move(moveDirection * Time.deltaTime);
